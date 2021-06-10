@@ -1,4 +1,5 @@
 use crate::tile::Tile;
+use rayon::prelude::*;
 
 /// A 2D Vec of Tiles, with a 1-element border of dead tiles.
 pub struct Grid {
@@ -17,8 +18,8 @@ impl Grid {
 
         grid.elements = grid
             .elements
-            .iter_mut()
-            .map(|row| row.iter_mut().map(|_| Tile::random()).collect())
+            .par_iter_mut()
+            .map(|row| row.par_iter_mut().map(|_| Tile::random()).collect())
             .collect();
 
         grid
