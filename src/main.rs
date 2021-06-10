@@ -19,10 +19,11 @@ fn main() {
     const OPENGL: OpenGL = OpenGL::V3_2;
     const GRID_X: usize = 50;
     const GRID_Y: usize = 50;
+    const TILE_SIZE: usize = 4;
     let colors = GameColors::new(
         [0.2, 0.2, 0.2, 1.0], // background
         [0.5, 0.5, 0.5, 1.0], // alive
-        [0.2, 0.2, 0.2, 1.0], // dead
+        [0.3, 0.3, 0.3, 1.0], // dead
     );
 
     let mut window: GlutinWindow = WindowSettings::new("snake", [600, 400])
@@ -33,7 +34,7 @@ fn main() {
         .unwrap();
 
     let grid = Grid::new(GRID_X, GRID_Y);
-    let mut game = Game::new(GlGraphics::new(OPENGL), grid, colors);
+    let mut game = Game::new(GlGraphics::new(OPENGL), grid, colors, TILE_SIZE);
     let mut events = Events::new(EventSettings::new()).ups(1);
 
     while let Some(event) = events.next(&mut window) {

@@ -19,4 +19,8 @@ impl Grid {
     pub fn get_full_grid_mut(&mut self) -> &mut Vec<Vec<Tile>> {
         &mut self.elements
     }
+
+    pub fn get_rows_as_slice(&self) -> &[Vec<Tile>] {
+        &self.elements[1..self.elements.len() - 2]
+    }
 }
