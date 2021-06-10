@@ -1,7 +1,7 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum Tile {
-    Alive,
     Dead,
+    Alive,
 }
 
 use rand::random;
@@ -12,6 +12,14 @@ impl Tile {
         match random::<bool>() {
             true => Alive,
             false => Dead,
+        }
+    }
+
+    pub fn update(&self, neighbours: usize) -> Self {
+        match self {
+            Alive if neighbours == 2 || neighbours == 3 => Alive,
+            Dead if neighbours == 3 => Alive,
+            _ => Dead,
         }
     }
 }

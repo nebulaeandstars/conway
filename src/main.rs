@@ -22,8 +22,8 @@ fn main() {
     const TILE_SIZE: usize = 4;
     let colors = GameColors::new(
         [0.2, 0.2, 0.2, 1.0], // background
-        [0.5, 0.5, 0.5, 1.0], // alive
-        [0.3, 0.3, 0.3, 1.0], // dead
+        [0.8, 0.8, 0.8, 1.0], // alive
+        [0.2, 0.2, 0.2, 1.0], // dead
     );
 
     let mut window: GlutinWindow = WindowSettings::new("snake", [600, 400])
@@ -35,20 +35,20 @@ fn main() {
 
     let grid = Grid::random(GRID_X, GRID_Y);
     let mut game = Game::new(GlGraphics::new(OPENGL), grid, colors, TILE_SIZE);
-    let mut events = Events::new(EventSettings::new()).ups(1);
+    let mut events = Events::new(EventSettings::new()).ups(8);
 
     while let Some(event) = events.next(&mut window) {
         if let Some(args) = event.render_args() {
             game.render(args);
         }
 
-        if let Some(args) = event.update_args() {
-            game.update(args);
+        if let Some(_) = event.update_args() {
+            game.update();
         }
 
         if let Some(args) = event.button_args() {
             if args.state == ButtonState::Press {
-                unimplemented!()
+                game.update();
             }
         }
     }

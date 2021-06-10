@@ -56,5 +56,7 @@ impl Game {
     }
 
 
-    pub fn update(&mut self, _args: UpdateArgs) {}
+    pub fn update(&mut self) {
+        self.grid = self.grid.next();
+    }
 }
