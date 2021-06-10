@@ -58,10 +58,10 @@ impl Grid {
 
         new.elements = new
             .elements
-            .iter_mut()
+            .par_iter_mut()
             .enumerate()
             .map(|(x, row)| {
-                row.iter_mut()
+                row.par_iter_mut()
                     .enumerate()
                     .map(|(y, _)| match self.index_is_in_bounds(x, y) {
                         true => self.elements[x][y].update(self.get_neighbours(x, y)),
