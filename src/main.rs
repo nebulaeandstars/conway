@@ -17,7 +17,7 @@ use crate::grid::Grid;
 fn main() {
     // default settings
     const OPENGL: OpenGL = OpenGL::V3_2;
-    const GRID_X: usize = 50;
+    const GRID_X: usize = 75;
     const GRID_Y: usize = 50;
     const TILE_SIZE: usize = 4;
     let colors = GameColors::new(
@@ -33,7 +33,7 @@ fn main() {
         .build()
         .unwrap();
 
-    let grid = Grid::new(GRID_X, GRID_Y);
+    let grid = Grid::random(GRID_X, GRID_Y);
     let mut game = Game::new(GlGraphics::new(OPENGL), grid, colors, TILE_SIZE);
     let mut events = Events::new(EventSettings::new()).ups(1);
 
@@ -42,8 +42,8 @@ fn main() {
             game.render(args);
         }
 
-        if let Some(_) = event.update_args() {
-            unimplemented!()
+        if let Some(args) = event.update_args() {
+            game.update(args);
         }
 
         if let Some(args) = event.button_args() {

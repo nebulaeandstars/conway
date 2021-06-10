@@ -8,16 +8,25 @@ pub struct Grid {
 impl Grid {
     pub fn new(x_size: usize, y_size: usize) -> Self {
         Grid {
-            elements: vec![vec![Tile::Dead; y_size + 2]; x_size + 2],
+            elements: vec![vec![Tile::random(); y_size + 2]; x_size + 2],
         }
     }
 
-    pub fn get_full_grid_ref(&self) -> &Vec<Vec<Tile>> {
-        &self.elements
+    pub fn random(x_size: usize, y_size: usize) -> Self {
+        let mut grid = Grid::new(x_size, y_size);
+
+        grid.elements = grid
+            .elements
+            .iter_mut()
+            .map(|row| row.iter_mut().map(|_| Tile::random()).collect())
+            .collect();
+
+        grid
     }
 
-    pub fn get_full_grid_mut(&mut self) -> &mut Vec<Vec<Tile>> {
-        &mut self.elements
+    #[allow(dead_code)]
+    pub fn get_full_grid_ref(&self) -> &Vec<Vec<Tile>> {
+        &self.elements
     }
 
     pub fn get_rows_as_slice(&self) -> &[Vec<Tile>] {

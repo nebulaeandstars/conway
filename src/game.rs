@@ -1,5 +1,5 @@
 use opengl_graphics::GlGraphics;
-use piston::input::{Button, Key, RenderArgs};
+use piston::input::{RenderArgs, UpdateArgs};
 
 use crate::colors::GameColors;
 use crate::grid::Grid;
@@ -54,4 +54,7 @@ impl Game {
             }
         });
     }
+
+
+    pub fn update(&mut self, _args: UpdateArgs) {}
 }
