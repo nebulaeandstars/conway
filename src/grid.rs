@@ -39,7 +39,7 @@ impl Grid {
     }
 
     pub fn get_neighbours(&self, x: usize, y: usize) -> usize {
-        if x <= 0 || y <= 0 || x >= self.x_size || y >= self.y_size {
+        if !self.index_is_in_bounds(x, y) {
             panic!("Bad index in get_neighbours! ({}, {})", x, y)
         }
 
