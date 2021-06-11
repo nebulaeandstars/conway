@@ -1,4 +1,4 @@
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, PartialEq)]
 pub enum Tile {
     Dead,
     Alive,
@@ -16,9 +16,9 @@ impl Tile {
     }
 
     pub fn update(&self, neighbours: usize) -> Self {
-        match self {
-            _ if neighbours == 3 => Alive,
-            Alive if neighbours == 2 => Alive,
+        match neighbours {
+            3 => Alive,
+            2 => *self,
             _ => Dead,
         }
     }

@@ -1,5 +1,5 @@
 use opengl_graphics::GlGraphics;
-use piston::input::{RenderArgs, UpdateArgs};
+use piston::input::RenderArgs;
 
 use crate::colors::GameColors;
 use crate::grid::Grid;
