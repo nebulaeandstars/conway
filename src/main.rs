@@ -42,7 +42,7 @@ fn main() {
 
     let grid = Grid::random(GRID_X, GRID_Y);
     let mut game = Game::new(GlGraphics::new(OPENGL), grid, colors, TILE_SIZE);
-    let mut events = Events::new(EventSettings::new()).ups(8);
+    let mut events = Events::new(EventSettings::new()).max_fps(30).ups(8);
 
     while let Some(event) = events.next(&mut window) {
         if let Some(args) = event.render_args() {
