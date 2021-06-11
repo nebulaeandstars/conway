@@ -17,8 +17,8 @@ impl Tile {
 
     pub fn update(&self, neighbours: usize) -> Self {
         match self {
-            Alive if neighbours == 2 || neighbours == 3 => Alive,
-            Dead if neighbours == 3 => Alive,
+            _ if neighbours == 3 => Alive,
+            Alive if neighbours == 2 => Alive,
             _ => Dead,
         }
     }
