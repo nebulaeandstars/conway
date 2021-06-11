@@ -27,7 +27,7 @@ fn main() {
     );
 
     let mut window: Window = WindowSettings::new(
-        "snake",
+        "conway",
         [
             (TILE_SIZE * (GRID_X - 1)) as u32,
             (TILE_SIZE * (GRID_Y - 1)) as u32,
