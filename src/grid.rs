@@ -79,3 +79,17 @@ impl Grid {
         x > 0 && y > 0 && x < self.x_size && y < self.y_size
     }
 }
+
+
+#[cfg(test)]
+mod bench {
+    extern crate test;
+    use crate::grid::Grid;
+
+    #[bench]
+    fn bench_grid_update(b: &mut test::Bencher) {
+        let grid = Grid::random(500, 500);
+
+        b.iter(|| grid.next())
+    }
+}
