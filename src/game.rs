@@ -1,5 +1,6 @@
 use opengl_graphics::GlGraphics;
 use piston::input::RenderArgs;
+use std::sync::Mutex;
 
 use crate::colors::GameColors;
 use crate::grid::Grid;
@@ -30,12 +31,13 @@ impl Game {
         let tile_size = &self.tile_size;
         let grid_rows = self.grid.get_rows_as_slice();
 
+
         self.gl.draw(args.viewport(), |c, gl| {
             clear(colors.get_background(), gl);
 
+            let gl = Mutex::new(gl); // not actually needed, just here as a reminder
             let transform = c.transform.trans(0.0, 0.0);
 
-            // for each tile in the grid, draw a rectangle
             for (x, row) in grid_rows.iter().enumerate() {
                 for (y, tile) in row[1..row.len() - 2].iter().enumerate() {
                     let color = match tile {
@@ -49,7 +51,8 @@ impl Game {
                         *tile_size as f64,
                     );
 
-                    rectangle(color, render, transform, gl);
+                    let mut gl = gl.lock().unwrap();
+                    rectangle(color, render, transform, *gl);
                 }
             }
         });
